@@ -10,5 +10,3 @@ class ProductoModel(models.Model):
     categoriaId = models.ForeignKey(
         CategoriaModel, related_name='productos', 
         on_delete=models.CASCADE )
-
- 
