@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from .models import CategoriaModel, ProductoModel
-from .serializers import CategoriaSerializer, ProductoSerializer
+from .serializers import CategoriaSerializer, ProductoSerializer, productGetSerializer
 from rest_framework.response import Response
 
 class CategoriaListCreate(APIView):
@@ -26,7 +26,7 @@ class CategoriaDelete(APIView):
 class ProductListCreate(APIView):
     def get(self, request):
         productos= ProductoModel.objects.all()
-        serializer = ProductoSerializer(productos, many=True)
+        serializer = productGetSerializer(productos, many=True)
         return Response(serializer.data)
     
     ##################################################################
