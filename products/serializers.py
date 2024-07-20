@@ -14,4 +14,10 @@ class ProductoSerializer(serializers.ModelSerializer):
 
         fields = ['id', 'nombre', 'precio', 'descripcion','categoriaId']
 
+class productGetSerializer(serializers.ModelSerializer):
+    categoriaId = CategoriaSerializer()
+   
+    class Meta:
+        model = ProductoModel
 
+        fields = ['id', 'nombre', 'precio', 'descripcion','categoriaId']
