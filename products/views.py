@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from .models import CategoriaModel, ProductoModel
 from .serializers import CategoriaSerializer, ProductoSerializer, productGetSerializer
 from rest_framework.response import Response
+from rest_framework import status
+#from django import HTTP404
 
 class CategoriaListCreate(APIView):
     def get(self, request):
@@ -26,20 +28,44 @@ class CategoriaDelete(APIView):
 class ProductListCreate(APIView):
     def get(self, request):
         productos= ProductoModel.objects.all()
-        serializer = productGetSerializer(productos, many=True)
+        serializer = ProductoSerializer(productos, many=True)
         return Response(serializer.data)
     
     ##################################################################
     def post(self, request): 
-        print(request.data)
+        #print(request.data)
         serializer = ProductoSerializer(data=request.data)
         if serializer.is_valid():
             
-            serializer.save()
-            return Response({"msg": serializer.data})
+            img_url = serializer.validated_data['img_url']
+            img_url.name = 'images/' + img_url.name
+    #agregar imagen = serializer.save()
+            imagen = serializer.save()
+            
+            img_url_full = imagen.img_url.url
+            imagen.img_url_full = img_url_full
+            imagen.save()
+
+            respuesta = ProductoSerializer(imagen)
+            return Response(respuesta.data, status = status.HTTP_201_CREATED)
+           
+            #serializer.save()
+            #return Response({"msg": respuesta.data})
         else:
-        #serializer.errors
+        
             return Response({"msg": serializer.errors})
+        
+
+    # def put(self, request, pk):
+    #     try:
+    #         categoria = CategoriaModel.objects.get(pk=pk)
+    #     except CategoriaModel.DoesNotExist:
+    #         raise HTTP404
+    #     serializer = CategoriaSerializer(categoria, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class ProductDelete(APIView):
     def delete(self, request, pk):

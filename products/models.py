@@ -9,5 +9,6 @@ class ProductoModel(models.Model):
     precio = models.FloatField(blank=False, null=False)
     categoriaId = models.ForeignKey(
         CategoriaModel, related_name='productos', 
-        on_delete=models.CASCADE )
-
+        on_delete=models.CASCADE ),
+    img_url = models.ImageField(upload_to='images/', blank = True, null=True)
+    img_url_full = models.URLField(blank = True, null=True)
