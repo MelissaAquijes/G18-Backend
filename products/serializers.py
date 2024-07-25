@@ -7,21 +7,18 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductoSerializer(serializers.ModelSerializer):
-    #categoriaId = CategoriaSerializer()
-
     img_url_full = serializers.CharField(source = 'img_url.url', read_only = True)
 
     class Meta:
         model = ProductoModel
-        fields = ['id', 'nombre', 'precio', 'descripcion','categoriaId', 'img_url_full']
+        fields = ['id', 'nombre', 'precio', 'descripcion','categoria', 'img_url' ,'img_url_full']
 
 class productGetSerializer(serializers.ModelSerializer):
-    categoriaId = CategoriaSerializer()
+    categoria = CategoriaSerializer()
    
     img_url_full = serializers.CharField(source = 'img_url.url', read_only = True)
     
     class Meta:
         model = ProductoModel
 
-        fields = ['id', 'nombre', 'precio', 'descripcion','categoriaId', 'img_url_full']
-
+        fields = ['id', 'nombre', 'precio', 'descripcion','categoria', 'img_url','img_url_full']
