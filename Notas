@@ -8,3 +8,5 @@ Para instalar todas las dependencias listadas en requirements.txt, utiliza:
 
   pip install -r requirements.txt
 
+
+
