@@ -1,10 +1,10 @@
 IMPORTANTE
 Siempre que instales un nuevo paquete o modifiques tus dependencias, asegúrate de actualizar el archivo requirements.txt ejecutando:
 
-  pip freeze > requirements.txt
+pip freeze > requirements.txt
 
 
 Para instalar todas las dependencias listadas en requirements.txt, utiliza:
 
-  pip install -r requirements.txt
+pip install -r requirements.txt
 
