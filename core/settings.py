@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'products',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -71,8 +72,7 @@ DATABASES = {
         "NAME": config("NAME"),
         "USER": config("USER"),
         "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST"),
-        "PORT": config("PORT"),
+        "HOST": config("HOST")
     }
 }
 
