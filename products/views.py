@@ -3,7 +3,7 @@ from .models import CategoriaModel, ProductoModel
 from .serializers import CategoriaSerializer, ProductoSerializer, productGetSerializer
 from rest_framework.response import Response
 from rest_framework import status
-#from django import HTTP404
+
 
 class CategoriaListCreate(APIView):
     def get(self, request):
@@ -28,7 +28,7 @@ class CategoriaDelete(APIView):
 class ProductListCreate(APIView):
     def get(self, request):
         productos= ProductoModel.objects.all()
-        serializer = ProductoSerializer(productos, many=True)
+        serializer = productGetSerializer(productos, many=True)
         return Response(serializer.data)
     
     ##################################################################
@@ -55,20 +55,19 @@ class ProductListCreate(APIView):
         
             return Response({"msg": serializer.errors})
         
-
-    # def put(self, request, pk):
-    #     try:
-    #         categoria = CategoriaModel.objects.get(pk=pk)
-    #     except CategoriaModel.DoesNotExist:
-    #         raise HTTP404
-    #     serializer = CategoriaSerializer(categoria, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class ProductDelete(APIView):
+class ProductDeletePut(APIView):
     def delete(self, request, pk):
         productos = ProductoModel.objects.get(id=pk)
         productos.delete()
         return Response ({"msg:": "eliminacion exitosa"})
+
+    def put(self, request, pk):
+        try:
+            categoria = CategoriaModel.objects.get(pk=pk)
+        except CategoriaModel.DoesNotExist:
+            raise status.HTTP_404_NOT_FOUND
+        serializer = CategoriaSerializer(categoria, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
