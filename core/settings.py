@@ -26,13 +26,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'rest_framework',
+    "corsheaders",
     'products',
-    'users'
+    'users',
+    'jazzmin'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,7 +77,7 @@ DATABASES = {
         "NAME": config("NAME"),
         "USER": config("USER"),
         "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST")
+        "HOST": config("HOST"),
     }
 }
 
@@ -117,3 +122,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
