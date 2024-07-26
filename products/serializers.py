@@ -9,6 +9,12 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     img_url_full = serializers.CharField(source = 'img_url.url', read_only = True)
 
+    def validate_precio(self, precio):
+        if precio < 0:
+            raise serializers.ValidationError(
+                "El precio debe ser mayor a cero")
+        return precio
+
     class Meta:
         model = ProductoModel
         fields = ['id', 'nombre', 'precio', 'descripcion','categoria', 'img_url' ,'img_url_full']
