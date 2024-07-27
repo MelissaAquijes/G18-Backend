@@ -31,11 +31,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'products',
+    'users',
     'jazzmin'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,11 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME' : 'df8x07szf',
-    'API_KEY' : '888118742786562',
-    'API_SECRET': 'ecZuvC4aAzQlMi-1qBsNvrDssl8',
-}
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
