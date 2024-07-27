@@ -38,7 +38,7 @@ class ProductListCreate(APIView):
             
             img_url = serializer.validated_data['img_url']
             img_url.name = 'images/' + img_url.name
-    #agregar imagen = serializer.save()
+    
             imagen = serializer.save()
             
             img_url_full = imagen.img_url.url
