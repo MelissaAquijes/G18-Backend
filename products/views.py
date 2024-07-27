@@ -8,7 +8,7 @@ class CategoriaListCreate(APIView):
     def get(self, request):
         caterogia = CategoriaModel.objects.all()
         serializer = CategoriaSerializer(caterogia, many=True)
-        return Response({"msg": serializer.data }) 
+        return Response(serializer.data) 
         
     def post(self, request):
         serializer = CategoriaSerializer(data=request.data)
