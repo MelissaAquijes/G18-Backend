@@ -8,7 +8,7 @@ class CategoriaListCreate(APIView):
     def get(self, request):
         caterogia = CategoriaModel.objects.all()
         serializer = CategoriaSerializer(caterogia, many=True)
-        return Response({"msg": serializer.data }) 
+        return Response(serializer.data) 
         
     def post(self, request):
         serializer = CategoriaSerializer(data=request.data)
@@ -38,7 +38,7 @@ class ProductListCreate(APIView):
             
             img_url = serializer.validated_data['img_url']
             img_url.name = 'images/' + img_url.name
-    #agregar imagen = serializer.save()
+    
             imagen = serializer.save()
             
             img_url_full = imagen.img_url.url
