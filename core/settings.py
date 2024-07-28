@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-j^^55a%++-q=d!c_n*2sjucn-%na-9dvhj6u5a$&$6th0!!1b&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -148,3 +148,6 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
 }
+
+STATIC_ROOT = BASE_DIR/'static'
+
