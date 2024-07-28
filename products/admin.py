@@ -10,3 +10,4 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'precio', 'categoria')
     search_fields = ('nombre', 'categoria__nombre')
     list_filter = ('categoria',)
+    exclude = ('img_url_full',)
